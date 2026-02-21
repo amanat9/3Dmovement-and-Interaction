@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class CoinCollection : MonoBehaviour
 {
     private int Count = 0;
@@ -10,6 +10,7 @@ public class CoinCollection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("HIITTTT");
         if (other.transform.tag == "Coin")
         {
             Count++;
@@ -17,7 +18,23 @@ public class CoinCollection : MonoBehaviour
             Destroy(other.gameObject);
         
         }
+
+        if (other.transform.tag == "Flag")
+        {
+            Debug.Log("Secene HIITTTT");
+            GotoL1();
+
+        }
     }
+
+    void GotoL1()
+    {
+        SceneManager.LoadScene("Level2");
+    
+    }
+
+
+
 
     private void Update()
     {
