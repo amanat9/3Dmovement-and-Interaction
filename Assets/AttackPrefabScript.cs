@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour
+public class AttackPrefabScript : MonoBehaviour
 {
     public float life = 3;
     public GunShoot gunShoot;
@@ -15,9 +15,9 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy" )
+        if (collision.gameObject.tag == "Player")
         {
-            gunShoot.enemyDestroyed++;
+            //gunShoot.enemyDestroyed++;
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }
