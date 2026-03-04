@@ -5,6 +5,7 @@ using TMPro;
 
 public class GunShoot : MonoBehaviour
 {
+    public SoundPlayer soundPlayer;
     public Transform bulletSpawnPoint;
     public GameObject bulletPrefab;
     public float bulletSpeed = 30;
@@ -19,6 +20,7 @@ public class GunShoot : MonoBehaviour
         {
             var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             bullet.SetActive(true);
+            soundPlayer.PlayGunFire();
             bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
             firingDelay = 0.5f;
         }
