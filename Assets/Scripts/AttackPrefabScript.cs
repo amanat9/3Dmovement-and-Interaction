@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class AttackPrefabScript : MonoBehaviour
 {
     public float life = 3;
     public GunShoot gunShoot;
+    public HealthBar healthBar; 
     // Start is called before the first frame update
     void Awake()
     {
+        healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         Destroy(gameObject, life);
     }
 
@@ -18,8 +20,10 @@ public class AttackPrefabScript : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             //gunShoot.enemyDestroyed++;
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
+            double updatedHealth = healthBar.healthBarSprite.fillAmount - 0.2;
+            healthBar.UpdateHealthBar(updatedHealth);
+            //Destroy(collision.gameObject);
+            //Destroy(gameObject);
         }
     }
 
