@@ -5,6 +5,7 @@ using TMPro;
 
 public class GunShoot : MonoBehaviour
 {
+    public GameObject muzzleEffect;
     public SoundPlayer soundPlayer;
     public Transform bulletSpawnPoint;
     public GameObject bulletPrefab;
@@ -18,6 +19,7 @@ public class GunShoot : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && firingDelay <=0 )
         {
+            muzzleEffect.GetComponent<ParticleSystem>().Play();
             var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             bullet.SetActive(true);
             soundPlayer.PlayGunFire();
