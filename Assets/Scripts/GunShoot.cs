@@ -6,6 +6,7 @@ using TMPro;
 public class GunShoot : MonoBehaviour
 {
     public GameObject muzzleEffect;
+    private Animator m_Animator;
     public SoundPlayer soundPlayer;
     public Transform bulletSpawnPoint;
     public GameObject bulletPrefab;
@@ -15,10 +16,18 @@ public class GunShoot : MonoBehaviour
     public float firingDelay = 0f;
 
 
+    private void Start()
+    {
+        m_Animator = GetComponent<Animator>();
+    }
+
+
+
     private void Update()
     {
         if (Input.GetMouseButton(0) && firingDelay <=0 )
         {
+            m_Animator.SetTrigger("Recoil");
             muzzleEffect.GetComponent<ParticleSystem>().Play();
             var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             bullet.SetActive(true);
