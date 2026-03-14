@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+
+    private Animator anim;
+
     public NavMeshAgent agent;
     public Transform player;
 
@@ -36,7 +39,8 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<Transform>();
+        anim = GetComponent<Animator>();
+        //player = GameObject.Find("Player").GetComponent<Transform>();
         agent = GetComponent<NavMeshAgent>();
 
 
@@ -72,6 +76,8 @@ public class EnemyAI : MonoBehaviour
 
     void Patrolling()
     {
+        anim.SetBool("IsIdle", true);
+        anim.SetBool("IsRunning", false);
         if (walkPointSet == false)
         {
             GenerateWalkPoint();
@@ -85,6 +91,8 @@ public class EnemyAI : MonoBehaviour
 
     void ChasePlayer()
     {
+        anim.SetBool("IsRunning", true);
+        anim.SetBool("IsIdle", false);
         agent.SetDestination(player.position);
     }
 
@@ -111,12 +119,12 @@ public class EnemyAI : MonoBehaviour
 
     void Attack()
         {
-        // attack code here;
+        anim.SetTrigger("attack");
         Rigidbody rb = Instantiate(AttackPrefab, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward* attackSpeedForward, ForceMode.Impulse);
-        rb.AddForce(transform.up*attackSpeedUp, ForceMode.Impulse);
-        //rb.AddForce(transform.forward*32f, ForceMode.Impulse);
-        }
+        rb.AddForce(transform.forward * attackSpeedForward, ForceMode.Impulse);
+        rb.AddForce(transform.up * attackSpeedUp, ForceMode.Impulse);
+
+    }
 
    
 
