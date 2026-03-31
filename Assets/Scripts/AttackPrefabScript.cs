@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class AttackPrefabScript : MonoBehaviour
 {
     public float life = 3;
-    public GunShoot gunShoot;
     public HealthBar healthBar; 
     // Start is called before the first frame update
     void Awake()
