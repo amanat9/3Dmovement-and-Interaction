@@ -67,7 +67,7 @@ public class EnemySpawnManager : MonoBehaviour
         if (activeEnemies.Count == 0)
         {
             Debug.Log("All enemies killed.");
-            //LoadNextLevel();
+            LoadNextLevel();
         }
     }
 
