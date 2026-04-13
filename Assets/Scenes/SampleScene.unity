@@ -157,7 +157,7 @@ MonoBehaviour:
   maxX: 10
   minZ: -10
   maxZ: 10
-  nextLevelName: FinalLevel
+  nextLevelName: L2
 --- !u!4 &74971972
 Transform:
   m_ObjectHideFlags: 0
