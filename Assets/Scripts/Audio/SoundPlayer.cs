@@ -5,7 +5,10 @@ using UnityEngine;
 public class SoundPlayer : MonoBehaviour
 {
     public AudioSource src;
+    public AudioSource EnemySrc;
     public AudioClip GunFire, GunReload;
+    public AudioClip EnemyDying;
+   
 
 
     public void PlayGunFire()
@@ -19,6 +22,14 @@ public class SoundPlayer : MonoBehaviour
     {
         src.clip = GunReload;
         src.Play();
+
+    }
+
+
+    public void PlayEnemyDying()
+    {
+        EnemySrc.clip = EnemyDying;
+        EnemySrc.Play();
 
     }
 

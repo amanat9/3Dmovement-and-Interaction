@@ -6,6 +6,8 @@ public class BulletScript : MonoBehaviour
 {
     public float life = 3;
     public GunShoot gunShoot;
+    public SoundPlayer soundPlayer;
+    public GameObject EnemyPosition;
     // Start is called before the first frame update
     void Awake()
     {
@@ -15,8 +17,13 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy" )
+        if (collision.gameObject.tag == "Enemy")
         {
+            EnemyPosition.transform.position = collision.gameObject.transform.position;
+            soundPlayer.PlayEnemyDying();
+
+
+
             gunShoot.enemyDestroyed++;
             Destroy(collision.gameObject);
             Destroy(gameObject);
