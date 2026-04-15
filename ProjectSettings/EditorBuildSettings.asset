@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/FinalLevel.unity
     guid: 40721911869b215468a4c806d1c27bd8
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/OLDMainMenu.unity
     guid: 54e69855fcf26fc44a3f76ed916d9326
+  - enabled: 1
+    path: Assets/Scenes/NewL2.unity
+    guid: 63ecbabc462935845ad1e951de4578bd
   m_configObjects: {}

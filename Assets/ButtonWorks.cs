@@ -27,6 +27,31 @@ public class ButtonWorks : MonoBehaviour
     }
 
 
+
+    public void OnSaveClicked()
+    {
+        // Talk directly to the global Instance
+        if (GameStateController.Instance != null)
+        {
+            GameStateController.Instance.SaveGame();
+        }
+    }
+
+
+    public void OnLoadClicked()
+    {
+        // Talk directly to the global Instance
+        if (GameStateController.Instance != null)
+        {
+            GameStateController.Instance.LoadGame();
+        }
+    }
+
+
+
+
+
+
     public void QuitGame()
     {
         Debug.Log("Quit Button Pressed!");

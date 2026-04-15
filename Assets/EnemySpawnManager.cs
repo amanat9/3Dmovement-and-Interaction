@@ -25,10 +25,10 @@ public class EnemySpawnManager : MonoBehaviour
 
     void Start()
     {
-        SpawnEnemies();
+        //SpawnEnemies();
     }
 
-    void SpawnEnemies()
+    public void SpawnEnemies()
     {
         for (int i = 0; i < numberOfEnemiesToSpawn; i++)
         {
