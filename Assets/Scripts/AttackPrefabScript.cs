@@ -20,8 +20,8 @@ public class AttackPrefabScript : MonoBehaviour
         {
             Destroy(gameObject);
             //gunShoot.enemyDestroyed++;
-            //double updatedHealth = healthBar.healthBarSprite.fillAmount - 0.2;
-            //healthBar.UpdateHealthBar(updatedHealth);
+            double updatedHealth = healthBar.healthBarSprite.fillAmount - 0.1;
+            healthBar.UpdateHealthBar(updatedHealth);
             //Destroy(collision.gameObject);
             //Destroy(gameObject);
         }

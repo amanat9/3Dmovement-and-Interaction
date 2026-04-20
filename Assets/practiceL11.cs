@@ -5,7 +5,7 @@ using UnityEngine;
 public class practiceL11 : MonoBehaviour
 {
 
-    string s = "racecar"
+    string s = "racecar";
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +13,13 @@ public class practiceL11 : MonoBehaviour
         if (palindromeChecker())
         {
             Debug.Log("True");
-        } //else
+        }
+
+        else 
+        {
+            
+        
+        }
 
     }
 
