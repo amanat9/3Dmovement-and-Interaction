@@ -19,7 +19,7 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("WeakPoint"))
         {
             // Set position and play sound
             EnemyPosition.transform.position = collision.gameObject.transform.position;
@@ -30,12 +30,25 @@ public class BulletScript : MonoBehaviour
 
             if (enemyVariables != null && enemyVariables.healthBar != null)
             {
-                // Logic for when the enemy has a health bar
-                float updatedHealth = enemyVariables.healthBar.healthBarSprite.fillAmount - 0.35f;
-                enemyVariables.healthBar.UpdateHealthBar(updatedHealth);
 
-                // Destroy the projectile
-                Destroy(gameObject);
+                if (collision.gameObject.CompareTag("WeakPoint"))
+                {
+                    // Logic for when the enemy has a health bar
+                    float updatedHealth = enemyVariables.healthBar.healthBarSprite.fillAmount - 1.00f;
+                    enemyVariables.healthBar.UpdateHealthBar(updatedHealth);
+
+                    // Destroy the projectile
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    // Logic for when the enemy has a health bar
+                    float updatedHealth = enemyVariables.healthBar.healthBarSprite.fillAmount - 0.35f;
+                    enemyVariables.healthBar.UpdateHealthBar(updatedHealth);
+
+                    // Destroy the projectile
+                    Destroy(gameObject);
+                }
             }
             else
             {
