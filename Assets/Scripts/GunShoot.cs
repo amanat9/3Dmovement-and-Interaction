@@ -16,7 +16,16 @@ public class GunShoot : MonoBehaviour
     private Animator m_Animator;
     //muzzle effect 
     public GameObject muzzleEffect;
- 
+
+
+    //pistol, bullet speed 30, firing delay 0.5, magazine size 7
+    //ak, bullet speed 50, firing delay 0.3, magazine size 30
+    public GameObject gunPistol;
+    public bool HavePistol=true;
+    public GameObject gunAK47;
+    public bool HaveAK47=false;
+    public string currentGun = "Pistol"; // other option : AK47
+
 
     public SoundPlayer soundPlayer;
     public Transform bulletSpawnPoint;
@@ -25,6 +34,7 @@ public class GunShoot : MonoBehaviour
     public TextMeshProUGUI enemyText;
     public int enemyDestroyed = 0;
     public float firingDelay = 0f;
+    public float firingDelayValue = 0.5f;
     public TextMeshProUGUI AmmoText;
 
     private void Start()
@@ -39,6 +49,12 @@ public class GunShoot : MonoBehaviour
 
     private void Update()
     {
+        // Weapon switching input
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SwitchWeapon();
+        }
+
         if (Input.GetMouseButton(0) && firingDelay <=0 )
         {
             if (bulletleft > 0)
@@ -86,6 +102,63 @@ public class GunShoot : MonoBehaviour
         bullet.SetActive(true);
         soundPlayer.PlayGunFire();
         bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
-        firingDelay = 0.5f;
+        firingDelay = firingDelayValue;
     }
+
+
+
+
+    ////////////////////////////////////// SWITCH WEAPONS/////////////////////////////////////
+    ///
+
+    private void SwitchWeapon()
+    {
+        // Cancel any ongoing reloads when switching weapons
+        if (isReloading)
+        {
+            isReloading = false;
+            CancelInvoke("ReloadCompleted");
+        }
+
+        // Check which gun is active and if the player actually owns the other gun
+        if (currentGun == "Pistol" && HaveAK47 == true)
+        {
+            EquipAK47Stats();
+        }
+        else if (currentGun == "AK47" && HavePistol == true)
+        {
+            EquipPistolStats();
+        }
+    }
+
+    private void EquipPistolStats()
+    {
+        currentGun = "Pistol";
+        gunAK47.SetActive(false);
+        gunPistol.SetActive(true);
+
+        // Apply Pistol Stats
+        bulletSpeed = 30f;
+        firingDelayValue = 0.5f;
+        magazineSize = 7;
+        bulletleft = magazineSize;
+    }
+
+    private void EquipAK47Stats()
+    {
+        currentGun = "AK47";
+        gunPistol.SetActive(false);
+        gunAK47.SetActive(true);
+
+        // Apply AK47 Stats
+        bulletSpeed = 50f;
+        firingDelayValue = 0.3f;
+        magazineSize = 30;
+        bulletleft = magazineSize;
+    }
+
+
+
+
+
 }
