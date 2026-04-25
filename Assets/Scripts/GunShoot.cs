@@ -17,7 +17,8 @@ public class GunShoot : MonoBehaviour
     //muzzle effect 
     public GameObject muzzleEffect;
 
-
+    public GameObject Sword;
+    public GameObject Shield; 
     //pistol, bullet speed 30, firing delay 0.5, magazine size 7
     //ak, bullet speed 50, firing delay 0.3, magazine size 30
     public GameObject gunPistol;
