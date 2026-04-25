@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    public float life = 3;
+    public float life = 7;
     public GunShoot gunShoot;
     public SoundPlayer soundPlayer;
     public GameObject EnemyPosition;
