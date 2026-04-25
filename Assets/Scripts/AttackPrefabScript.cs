@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class AttackPrefabScript : MonoBehaviour
 {
     public float life = 3;
-    public HealthBar healthBar; 
+    public HealthBar healthBar;
+    public SwordandShieldController SSC;
     // Start is called before the first frame update
     void Awake()
     {
@@ -16,7 +17,7 @@ public class AttackPrefabScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player"  && SSC.animBlocking ==false)
         {
             Destroy(gameObject);
             //gunShoot.enemyDestroyed++;

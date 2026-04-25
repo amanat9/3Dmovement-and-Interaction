@@ -6,6 +6,7 @@ public class SwordandShieldController : MonoBehaviour
 {
     public GameObject Sword;
     public GameObject Shield;
+    public bool animBlocking = false; 
     public bool CanAttack = true;
     public bool AlreadyHit = false;
     public float AttackCooldown = 1.0f;
@@ -18,9 +19,26 @@ public class SwordandShieldController : MonoBehaviour
             if (CanAttack)
             {
                 SwordAttack();
-            
+
             }
         }
+
+        // Blocking logic
+        if (Input.GetMouseButton(1))
+        {
+            animBlocking = true;
+            StartCoroutine(ResetAttackCooldown());
+        }
+        else
+        {
+            animBlocking = false;
+        }
+
+        Shield.GetComponent<Animator>().SetBool("Blocking", animBlocking);
+
+        // what i want to do if  if (Input.GetMouseButtonDown(1)) is held down then animBlocking is set to true. 
+        // the animator compnent of Shield i have to SetBool(animBlocking) please do the code. 
+
     }
 
     public void SwordAttack()
