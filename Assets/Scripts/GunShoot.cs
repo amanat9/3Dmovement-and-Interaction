@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GunShoot : MonoBehaviour
 {
@@ -38,12 +39,53 @@ public class GunShoot : MonoBehaviour
     public float firingDelayValue = 0.5f;
     public TextMeshProUGUI AmmoText;
 
+    [Header("Optional Auto-UI Lookup")]
+    public string enemyTextObjectName = "EnemyText";
+    public string ammoTextObjectName = "AmmoText";
+
     private void Start()
     {
         //animation 
         m_Animator = GetComponent<Animator>();
         //Reload
         bulletleft = magazineSize;
+        RefreshSceneUIReferences();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        RefreshSceneUIReferences();
+    }
+
+    private void RefreshSceneUIReferences()
+    {
+        if (enemyText == null)
+        {
+            GameObject enemyTextObject = GameObject.Find(enemyTextObjectName);
+            if (enemyTextObject != null)
+            {
+                enemyText = enemyTextObject.GetComponent<TextMeshProUGUI>();
+            }
+        }
+
+        if (AmmoText == null)
+        {
+            GameObject ammoTextObject = GameObject.Find(ammoTextObjectName);
+            if (ammoTextObject != null)
+            {
+                AmmoText = ammoTextObject.GetComponent<TextMeshProUGUI>();
+            }
+        }
     }
 
 
@@ -75,8 +117,15 @@ public class GunShoot : MonoBehaviour
 
         firingDelay = firingDelay - Time.deltaTime;
 
-        enemyText.text = "Enemy Destroyed: " + enemyDestroyed;
-        AmmoText.text = "Ammo: " +bulletleft +"/"+ magazineSize;
+        if (enemyText != null)
+        {
+            enemyText.text = "Enemy Destroyed: " + enemyDestroyed;
+        }
+
+        if (AmmoText != null)
+        {
+            AmmoText.text = "Ammo: " + bulletleft + "/" + magazineSize;
+        }
     }
 
 
