@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class GunShoot : MonoBehaviour
 {
+    private const string PistolWeapon = "Pistol";
+    private const string AK47Weapon = "AK47";
+    private const string SwordAndShieldWeapon = "SwordAndShield";
 
     //Reload
     public float reloadTime;
     public int magazineSize;
-        public int bulletleft;
+    public int bulletleft;
     public bool isReloading;
 
     //animation 
@@ -26,7 +29,7 @@ public class GunShoot : MonoBehaviour
     public bool HavePistol=true;
     public GameObject gunAK47;
     public bool HaveAK47=false;
-    public string currentGun = "Pistol"; // other option : AK47
+    public string currentGun = "Pistol"; // other options: AK47, SwordAndShield
 
 
     public SoundPlayer soundPlayer;
@@ -47,8 +50,7 @@ public class GunShoot : MonoBehaviour
     {
         //animation 
         m_Animator = GetComponent<Animator>();
-        //Reload
-        bulletleft = magazineSize;
+        EquipCurrentWeapon();
         RefreshSceneUIReferences();
     }
 
@@ -98,7 +100,7 @@ public class GunShoot : MonoBehaviour
             SwitchWeapon();
         }
 
-        if (Input.GetMouseButton(0) && firingDelay <=0 )
+        if (IsUsingGun() && Input.GetButton("Fire1") && firingDelay <=0)    //Input.GetButton("Fire1")    Input.GetMouseButton(0)
         {
             if (bulletleft > 0)
             {
@@ -106,7 +108,7 @@ public class GunShoot : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (IsUsingGun() && Input.GetKeyDown(KeyCode.R))
         { 
         
             Reload();
@@ -124,7 +126,14 @@ public class GunShoot : MonoBehaviour
 
         if (AmmoText != null)
         {
-            AmmoText.text = "Ammo: " + bulletleft + "/" + magazineSize;
+            if (IsUsingGun())
+            {
+                AmmoText.text = "Ammo: " + bulletleft + "/" + magazineSize;
+            }
+            else
+            {
+                AmmoText.text = "Sword & Shield";
+            }
         }
     }
 
@@ -143,6 +152,11 @@ public class GunShoot : MonoBehaviour
 
     void fireGun()
     {
+        if (!IsUsingGun())
+        {
+            return;
+        }
+
         bulletleft--;
         //animation 
         m_Animator.SetTrigger("Recoil");
@@ -163,29 +177,43 @@ public class GunShoot : MonoBehaviour
 
     private void SwitchWeapon()
     {
-        // Cancel any ongoing reloads when switching weapons
-        if (isReloading)
-        {
-            isReloading = false;
-            CancelInvoke("ReloadCompleted");
-        }
+        CancelReload();
 
-        // Check which gun is active and if the player actually owns the other gun
-        if (currentGun == "Pistol" && HaveAK47 == true)
+        if (currentGun == PistolWeapon)
         {
-            EquipAK47Stats();
+            if (HaveAK47 == true)
+            {
+                EquipAK47Stats();
+            }
+            else
+            {
+                EquipSwordAndShieldStats();
+            }
         }
-        else if (currentGun == "AK47" && HavePistol == true)
+        else if (currentGun == AK47Weapon)
         {
-            EquipPistolStats();
+            EquipSwordAndShieldStats();
+        }
+        else
+        {
+            if (HavePistol == true)
+            {
+                EquipPistolStats();
+            }
+            else if (HaveAK47 == true)
+            {
+                EquipAK47Stats();
+            }
         }
     }
 
     private void EquipPistolStats()
     {
-        currentGun = "Pistol";
-        gunAK47.SetActive(false);
-        gunPistol.SetActive(true);
+        currentGun = PistolWeapon;
+        SetWeaponActive(gunAK47, false);
+        SetWeaponActive(gunPistol, true);
+        SetWeaponActive(Sword, false);
+        SetWeaponActive(Shield, false);
 
         // Apply Pistol Stats
         bulletSpeed = 30f;
@@ -196,9 +224,11 @@ public class GunShoot : MonoBehaviour
 
     private void EquipAK47Stats()
     {
-        currentGun = "AK47";
-        gunPistol.SetActive(false);
-        gunAK47.SetActive(true);
+        currentGun = AK47Weapon;
+        SetWeaponActive(gunPistol, false);
+        SetWeaponActive(gunAK47, true);
+        SetWeaponActive(Sword, false);
+        SetWeaponActive(Shield, false);
 
         // Apply AK47 Stats
         bulletSpeed = 50f;
@@ -207,6 +237,63 @@ public class GunShoot : MonoBehaviour
         bulletleft = magazineSize;
     }
 
+    private void EquipSwordAndShieldStats()
+    {
+        currentGun = SwordAndShieldWeapon;
+        SetWeaponActive(gunPistol, false);
+        SetWeaponActive(gunAK47, false);
+        SetWeaponActive(Sword, true);
+        SetWeaponActive(Shield, true);
+
+        firingDelay = 0f;
+        bulletleft = 0;
+    }
+
+    private void EquipCurrentWeapon()
+    {
+        if (currentGun == AK47Weapon && HaveAK47 == true)
+        {
+            EquipAK47Stats();
+        }
+        else if (currentGun == SwordAndShieldWeapon)
+        {
+            EquipSwordAndShieldStats();
+        }
+        else if (HavePistol == true)
+        {
+            EquipPistolStats();
+        }
+        else if (HaveAK47 == true)
+        {
+            EquipAK47Stats();
+        }
+        else
+        {
+            EquipSwordAndShieldStats();
+        }
+    }
+
+    private void CancelReload()
+    {
+        if (isReloading)
+        {
+            isReloading = false;
+            CancelInvoke("ReloadCompleted");
+        }
+    }
+
+    private bool IsUsingGun()
+    {
+        return currentGun == PistolWeapon || currentGun == AK47Weapon;
+    }
+
+    private void SetWeaponActive(GameObject weapon, bool isActive)
+    {
+        if (weapon != null)
+        {
+            weapon.SetActive(isActive);
+        }
+    }
 
 
 

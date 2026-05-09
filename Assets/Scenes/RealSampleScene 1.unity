@@ -7041,12 +7041,12 @@ MonoBehaviour:
   bulletleft: 0
   isReloading: 0
   muzzleEffect: {fileID: 260398906}
-  Sword: {fileID: 0}
-  Shield: {fileID: 0}
+  Sword: {fileID: 664473831}
+  Shield: {fileID: 1166429315}
   gunPistol: {fileID: 1449465119}
   HavePistol: 1
   gunAK47: {fileID: 970363865}
-  HaveAK47: 0
+  HaveAK47: 1
   currentGun: Pistol
   soundPlayer: {fileID: 1539351656}
   bulletSpawnPoint: {fileID: 1895377870}
@@ -7057,6 +7057,8 @@ MonoBehaviour:
   firingDelay: 0
   firingDelayValue: 0.5
   AmmoText: {fileID: 2128358533}
+  enemyTextObjectName: EnemyText
+  ammoTextObjectName: AmmoText
 --- !u!95 &1799019793
 Animator:
   serializedVersion: 5

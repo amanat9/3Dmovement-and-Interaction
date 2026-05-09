@@ -7,6 +7,9 @@ Goal: quickly find the right script for each feature and understand how scripts 
 
 ### Player + Combat Core
 
+- `Assets/Scripts/Player/PersistentPlayerRoot.cs`  
+  Keeps the player GameObject alive across scene loads (`DontDestroyOnLoad`) and prevents duplicate players.
+
 - `Assets/Scripts/GunShoot.cs`  
   Handles gun firing, reload, ammo UI, weapon switching (Pistol/AK), and bullet spawning.
 
@@ -65,6 +68,7 @@ Goal: quickly find the right script for each feature and understand how scripts 
 4. `BulletScript` reads `SelfVariables.healthBar` from hit enemy.
 5. `BulletScript` calls `HealthBar.UpdateHealthBar(...)` to reduce enemy HP.
 6. `GunShoot` also calls `SoundPlayer.PlayGunFire()` for SFX.
+7. `GunShoot` refreshes UI references after each scene load so ammo/enemy text continues working on new levels.
 
 ### 2) Sword + Shield Combat
 
@@ -96,9 +100,17 @@ Goal: quickly find the right script for each feature and understand how scripts 
 2. `GetGun` sets `GunShoot.HaveAK47` or `GunShoot.HavePistol`.
 3. In gameplay, pressing `Q` in `GunShoot` switches weapons if owned.
 
+### 6) Keep Player + Guns Across Levels
+
+1. Attach `PersistentPlayerRoot` to the top-level player object (the same object that has the movement/combat setup).
+2. On first load, it calls `DontDestroyOnLoad(gameObject)` so player + child guns + gun scripts persist.
+3. If another scene also contains a player prefab, the duplicate is automatically destroyed.
+4. Result: gun unlocks, current ammo logic, and weapon functionality are preserved between levels.
+
 ## Fast “Where Should I Edit?” Guide
 
 - Change fire rate, ammo, reload, gun switching -> `Assets/Scripts/GunShoot.cs`
+- Keep player + gun hierarchy alive across level load -> `Assets/Scripts/Player/PersistentPlayerRoot.cs`
 - Change bullet damage / weakpoint multiplier -> `Assets/Scripts/BulletScript.cs`
 - Change sword damage / hit logic -> `Assets/SwordDamage.cs`
 - Change blocking behavior -> `Assets/SwordandShieldController.cs`
