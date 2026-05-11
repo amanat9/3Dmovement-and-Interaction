@@ -207,7 +207,7 @@ public class GunShoot : MonoBehaviour
         }
     }
 
-    private void EquipPistolStats()
+    public void EquipPistolStats()
     {
         currentGun = PistolWeapon;
         SetWeaponActive(gunAK47, false);
@@ -222,7 +222,7 @@ public class GunShoot : MonoBehaviour
         bulletleft = magazineSize;
     }
 
-    private void EquipAK47Stats()
+    public void EquipAK47Stats()
     {
         currentGun = AK47Weapon;
         SetWeaponActive(gunPistol, false);
@@ -237,7 +237,7 @@ public class GunShoot : MonoBehaviour
         bulletleft = magazineSize;
     }
 
-    private void EquipSwordAndShieldStats()
+    public void EquipSwordAndShieldStats()
     {
         currentGun = SwordAndShieldWeapon;
         SetWeaponActive(gunPistol, false);
