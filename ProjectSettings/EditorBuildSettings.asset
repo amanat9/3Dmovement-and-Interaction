@@ -8,28 +8,34 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UnusedLevels/Level2.unity
     guid: 97a55e615cac56d47a42b0dbea3160b3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/L2.unity
     guid: a72f7db9ddcee6d49be61b53655669af
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UnusedLevels/L3.unity
     guid: 47112995ceba6504c829ce515a9fea20
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UnusedLevels/L4.unity
     guid: 476c928d6d9338648a12d61ba40c5813
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UnusedLevels/L7.unity
     guid: dcb9879838c90e142a23172104a1e32a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FinalLevel.unity
     guid: 40721911869b215468a4c806d1c27bd8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OLDMainMenu.unity
     guid: 54e69855fcf26fc44a3f76ed916d9326
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NewL2.unity
     guid: 47adaa27ba23c1e458f915787023afe5
+  - enabled: 1
+    path: Assets/Scenes/RealSampleScene 1.unity
+    guid: d0a1458ad55e49b4480ddd77d4bc0b01
+  - enabled: 1
+    path: Assets/Scenes/Level2COPY.unity
+    guid: 07dfdb0e6ea845340bac2e5da1885526
   m_configObjects: {}

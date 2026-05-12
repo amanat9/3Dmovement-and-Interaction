@@ -7,6 +7,7 @@ public class CoinCollection : MonoBehaviour
 {
     private int Count = 0;
     public TextMeshProUGUI coinText;
+    public string SceneToLoad = "";
 
     private void OnTriggerEnter(Collider other)
     {
@@ -29,7 +30,7 @@ public class CoinCollection : MonoBehaviour
 
     void GotoL1()
     {
-        SceneManager.LoadScene("Level2");
+        SceneManager.LoadScene("Level2COPY");
     
     }
 

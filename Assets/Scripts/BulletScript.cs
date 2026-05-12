@@ -22,7 +22,7 @@ public class BulletScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("WeakPoint"))
         {
             // Set position and play sound
-            EnemyPosition.transform.position = collision.gameObject.transform.position;
+            //EnemyPosition.transform.position = collision.gameObject.transform.position;
             soundPlayer.PlayEnemyDying();
 
             // Get the health bar component from the enemy
